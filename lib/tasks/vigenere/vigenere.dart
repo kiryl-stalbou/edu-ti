@@ -23,16 +23,13 @@ class _VigenereState extends State<Vigenere>
 
   void _onKeyChanged(String rawKey) => _onInputChanged(_inputController.text);
 
-  String _filter(String text) => text.replaceAll(RegExp('[^а-яА-ЯёË]'), '');
+  String _filter(String text) => text.replaceAll(RegExp('[^а-яА-ЯёЁ]'), '');
 
   int _indexOf(String char) => _alphabet.indexOf(char.toLowerCase());
 
   void _onInputChanged(String rawInput) {
     final input = _filter(rawInput);
     final key = _filter(_keyController.text);
-
-    print(input);
-    print(key);
 
     final length = key.isEmpty ? 0 : input.length;
 
@@ -44,8 +41,6 @@ class _VigenereState extends State<Vigenere>
 
       final inIndex = _indexOf(inChar);
       final keyIndex = _indexOf(keyChar);
-
-      print('$inIndex $keyIndex');
 
       final outIndex = (inIndex + (_encode ? keyIndex : -keyIndex)) % 33;
       final outChar = _alphabet[outIndex];
