@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wt/utils.dart';
+import 'package:ti/utils.dart';
 
 class LFSR extends StatefulWidget {
   const LFSR({super.key});
@@ -14,7 +14,8 @@ class LFSR extends StatefulWidget {
 class _LFSRState extends State<LFSR> with AutomaticKeepAliveClientMixin {
   static const _polynom = [39, 4];
 
-  final _registerController = TextEditingController(text: '111111111111111111111111111111111111111');
+  final _registerController =
+      TextEditingController(text: '111111111111111111111111111111111111111');
   final _keyController = TextEditingController();
   final _sourceFileController = TextEditingController();
   final _resultFileController = TextEditingController();
@@ -34,9 +35,18 @@ class _LFSRState extends State<LFSR> with AutomaticKeepAliveClientMixin {
       resultBytes[i] = sourceBytes[i] ^ keyBytes[i];
     }
 
-    _sourceFileController.text = sourceBytes.getRange(0, 10).map((e) => e.toRadixString(2).padLeft(8, '0')).join();
-    _resultFileController.text = resultBytes.getRange(0, 10).map((e) => e.toRadixString(2).padLeft(8, '0')).join();
-    _keyController.text = keyBytes.getRange(0, 10).map((e) => e.toRadixString(2).padLeft(8, '0')).join();
+    _sourceFileController.text = sourceBytes
+        .getRange(0, 10)
+        .map((e) => e.toRadixString(2).padLeft(8, '0'))
+        .join();
+    _resultFileController.text = resultBytes
+        .getRange(0, 10)
+        .map((e) => e.toRadixString(2).padLeft(8, '0'))
+        .join();
+    _keyController.text = keyBytes
+        .getRange(0, 10)
+        .map((e) => e.toRadixString(2).padLeft(8, '0'))
+        .join();
     File('${sourceFile.path}.result').writeAsBytesSync(resultBytes);
   }
 
@@ -81,7 +91,8 @@ class _LFSRState extends State<LFSR> with AutomaticKeepAliveClientMixin {
           maxLength: _polynom[0],
           controller: _registerController,
           inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[01]'))],
-          decoration: const InputDecoration(labelText: 'Register', filled: true),
+          decoration:
+              const InputDecoration(labelText: 'Register', filled: true),
         ),
 
         ElevatedButton(
@@ -108,7 +119,8 @@ class _LFSRState extends State<LFSR> with AutomaticKeepAliveClientMixin {
           readOnly: true,
           controller: _sourceFileController,
           keyboardType: TextInputType.multiline,
-          decoration: const InputDecoration(labelText: 'Sorce file bits', filled: true),
+          decoration:
+              const InputDecoration(labelText: 'Sorce file bits', filled: true),
         ),
 
         const SizedBox(height: 20),
@@ -119,7 +131,8 @@ class _LFSRState extends State<LFSR> with AutomaticKeepAliveClientMixin {
           readOnly: true,
           controller: _resultFileController,
           keyboardType: TextInputType.multiline,
-          decoration: const InputDecoration(labelText: 'Result file bits', filled: true),
+          decoration: const InputDecoration(
+              labelText: 'Result file bits', filled: true),
         ),
       ],
     );

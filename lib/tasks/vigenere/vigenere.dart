@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:wt/utils.dart';
+import 'package:ti/utils.dart';
 
 const _alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
 

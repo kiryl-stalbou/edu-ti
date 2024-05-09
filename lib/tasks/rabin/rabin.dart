@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wt/utils.dart';
+import 'package:ti/utils.dart';
 
 class Rabin extends StatefulWidget {
   const Rabin({super.key});
@@ -21,7 +21,13 @@ class _RabinState extends State<Rabin> with AutomaticKeepAliveClientMixin {
   int get _b => int.tryParse(_bController.text) ?? -1;
   int get _n => _p * _q;
 
-  bool get _isInputValid => _p != _q && isPrime(_p) && isPrime(_q) && _b < _n && _p % 4 == 3 && _q % 4 == 3;
+  bool get _isInputValid =>
+      _p != _q &&
+      isPrime(_p) &&
+      isPrime(_q) &&
+      _b < _n &&
+      _p % 4 == 3 &&
+      _q % 4 == 3;
 
   Future<void> _onPickFileToEncode() async {
     if (!_isInputValid) return;
@@ -35,7 +41,8 @@ class _RabinState extends State<Rabin> with AutomaticKeepAliveClientMixin {
     final encodedBytes = _encode(bytes, _n, _b);
     final encodedString = encodedBytes.map((e) => '$e').join(' ');
 
-    File('lib/tasks/rabin/${file.path.split('/').last}.e').writeAsStringSync(encodedString);
+    File('lib/tasks/rabin/${file.path.split('/').last}.e')
+        .writeAsStringSync(encodedString);
   }
 
   Future<void> _onPickFileToDecode() async {
@@ -45,14 +52,20 @@ class _RabinState extends State<Rabin> with AutomaticKeepAliveClientMixin {
 
     if (file == null) return;
 
-    final digits = file.readAsStringSync().split(' ').map((e) => int.tryParse(e) ?? 0).toList();
+    final digits = file
+        .readAsStringSync()
+        .split(' ')
+        .map((e) => int.tryParse(e) ?? 0)
+        .toList();
 
     final decodedBytes = _decode(digits, _p, _q, _n, _b);
 
-    File('lib/tasks/rabin/${file.path.split('/').last}.d').writeAsBytesSync(decodedBytes);
+    File('lib/tasks/rabin/${file.path.split('/').last}.d')
+        .writeAsBytesSync(decodedBytes);
   }
 
-  List<int> _encode(Uint8List bytes, int n, int b) => bytes.map((byte) => byte * (byte + b) % n).toList();
+  List<int> _encode(Uint8List bytes, int n, int b) =>
+      bytes.map((byte) => byte * (byte + b) % n).toList();
 
   Uint8List _decode(List<int> digits, int p, int q, int n, int b) {
     final decodedBytes = Uint8List(digits.length);
@@ -141,11 +154,15 @@ class _RabinState extends State<Rabin> with AutomaticKeepAliveClientMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //
-            ElevatedButton(onPressed: _onPickFileToEncode, child: const Text('Pick file to encode')),
+            ElevatedButton(
+                onPressed: _onPickFileToEncode,
+                child: const Text('Pick file to encode')),
 
             const SizedBox(width: 10),
 
-            ElevatedButton(onPressed: _onPickFileToDecode, child: const Text('Pick file to decode')),
+            ElevatedButton(
+                onPressed: _onPickFileToDecode,
+                child: const Text('Pick file to decode')),
           ],
         ),
       ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wt/tasks/lfsr/lfsr.dart';
-import 'package:wt/tasks/rabin/rabin.dart';
+import 'package:ti/tasks/dsa/dsa.dart';
+import 'package:ti/tasks/lfsr/lfsr.dart';
+import 'package:ti/tasks/rabin/rabin.dart';
 
 import 'tasks/playfair/playfair.dart';
 import 'tasks/vigenere/vigenere.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
     Vigenere(),
     LFSR(),
     Rabin(),
+    DSA(),
   ];
 
   static const _tabs = <Tab>[
@@ -22,6 +24,7 @@ class App extends StatelessWidget {
     Tab(text: 'Vigenere'),
     Tab(text: 'LFSR'),
     Tab(text: 'Rabin'),
+    Tab(text: 'DSA'),
   ];
 
   @override
@@ -34,6 +37,7 @@ class App extends StatelessWidget {
         ),
         home: DefaultTabController(
           length: _views.length,
+          initialIndex: _views.length - 1,
           child: const Scaffold(
             appBar: TabBar(tabs: _tabs),
             body: Padding(
