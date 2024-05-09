@@ -1,3 +1,3 @@
-# wt
+# edu-ti
 
-A new Flutter project.
+
