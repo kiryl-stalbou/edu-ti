@@ -23,9 +23,13 @@ class _VigenereState extends State<Vigenere>
 
   void _onKeyChanged(String rawKey) => _onInputChanged(_inputController.text);
 
-  String _filter(String text) => text.replaceAll(RegExp('[^а-яА-ЯёЁ]'), '');
+  String _filter(String text) => text.replaceAll(RegExp('[^а-яА-ЯёË]'), '');
 
-  int _indexOf(String char) => _alphabet.indexOf(char.toLowerCase());
+  int _indexOf(String char) {
+    if (char == 'Ë') char = 'ё';
+
+    return _alphabet.indexOf(char.toLowerCase());
+  }
 
   void _onInputChanged(String rawInput) {
     final input = _filter(rawInput);

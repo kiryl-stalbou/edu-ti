@@ -9,8 +9,11 @@ extension StringUpperCaseExt on String {
   bool get isUpperCase => this == toUpperCase();
 }
 
-Future<File?> pickFile() async {
-  final result = await FilePicker.platform.pickFiles(dialogTitle: 'Pick File');
+Future<File?> pickFile({String? initialDirectory}) async {
+  final result = await FilePicker.platform.pickFiles(
+    initialDirectory: initialDirectory,
+    dialogTitle: 'Pick File',
+  );
 
   if (result == null) return null;
 
@@ -54,6 +57,12 @@ int powMod(int b, int e, int m) {
   }
 
   return result;
+}
+
+int powMod2(int b1, int b2, int e1, int e2, int m) {
+  int r1 = powMod(b1, e1, m);
+  int r2 = powMod(b2, e2, m);
+  return (r1 * r2) % m;
 }
 
 int fpow(int b, int e) {
